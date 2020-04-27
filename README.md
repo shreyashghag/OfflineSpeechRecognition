@@ -37,6 +37,47 @@ check for runtime permission
       }
 
 Step 5.
+
+    @BindView(R.id.result_tv)
+    lateinit var result_tv: TextView
+    @BindView(R.id.start_listen_btn)
+    lateinit var start_listen_btn: Button
+    @BindView(R.id.stop_listen_btn)
+    lateinit var stop_listen_btn: Button
+    @BindView(R.id.mute)
+    lateinit var mute: Button
+
+Step 6.
+
+setup Listensers for buttons.
+
+	start_listen_btn.setOnClickListener {
+            setSpeechListener()
+            result_tv.text = getString(R.string.you_may_speak)
+
+        }
+        stop_listen_btn.setOnClickListener {
+            if(mSpeechManager != null) {
+                result_tv.text = getString(R.string.destroied)
+                mSpeechManager.destroy()
+            }
+        }
+        mute.setOnClickListener {
+            if(mSpeechManager!=null) {
+                if(mSpeechManager.isInMuteMode) {
+                    mute.text = getString(R.string.mute)
+                    mSpeechManager.mute(false)
+                }
+                else
+                {
+                    mute.text = getString(R.string.un_mute)
+                    mSpeechManager.mute(true)
+                }
+            }
+        }
+
+Step 7.
+
 initailze the mSpeechRecognizerManager
 
       mSpeechManager=SpeechRecognizerManager(this,object:SpeechRecognizerManager.onResultsReady{
@@ -67,7 +108,9 @@ initailze the mSpeechRecognizerManager
         
         
         
-        
+      
+      
+      
         
   Methods/properties which can be used are
   | Method Name| Description |
@@ -76,4 +119,31 @@ initailze the mSpeechRecognizerManager
   |ismIsListening|returns back a boolean value whether it is Listening or not.|
   |mute(boolean:boolean)|accepts a boolean value as parameter to mute or unmute the mic.|
   |destroy|destroys the mSpeechRecognizerManager.|
+  
+  
+  
+  
+  
+    
+MIT License
+
+Copyright (c) 2020 Shreyash Ghag
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
   
