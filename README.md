@@ -78,7 +78,7 @@ setup Listensers for buttons.
 
 Step 7.
 
-initailze the mSpeechRecognizerManager
+Initialize the mSpeechRecognizerManager in onCreate
 
       mSpeechManager=SpeechRecognizerManager(this,object:SpeechRecognizerManager.onResultsReady{
             override fun onResults(results: ArrayList<String>) =
